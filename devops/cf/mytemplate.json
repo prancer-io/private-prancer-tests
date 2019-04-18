@@ -1,0 +1,46 @@
+{
+    "Resources" : {
+        "PrancerTutorialVpc": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": "172.16.0.0/16",
+                "EnableDnsSupport": true,
+                "EnableDnsHostnames": true,
+                "InstanceTenancy": "default"
+            }
+        },
+        "PrancerTutorialSecGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName": "prancer-tutorial-sg",
+                "GroupDescription": "Slightly more complex SG to show rule matching",
+                "VpcId": {
+                    "Ref": "PrancerTutorialVpc"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp" : "0.0.0.0/0",
+                        "Description" : "Allow anyone to access this port",
+                        "FromPort" : 80,
+                        "IpProtocol" : "tcp",
+                        "ToPort" : 80
+                    },
+                    {
+                        "CidrIp" : "0.0.0.0/0",
+                        "Description" : "Allow anyone to access this port from outside",
+                        "FromPort" : 443,
+                        "IpProtocol" : "tcp",
+                        "ToPort" : 443
+                    },
+                    {
+                        "CidrIp" : "172.16.0.0/16",
+                        "Description" : "Allow anyone from the VPC to access SSH ports",
+                        "FromPort" : 22,
+                        "IpProtocol" : "tcp",
+                        "ToPort" : 22
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -33,8 +33,8 @@
                         "ToPort" : 443
                     },
                     {
-                        "CidrIp" : "172.16.0.0/16",
-                        "Description" : "Allow anyone from the VPC to access SSH ports",
+                        "CidrIp" : "0.0.0.0/0",
+                        "Description" : "Allow anyone to access SSH ports",
                         "FromPort" : 22,
                         "IpProtocol" : "tcp",
                         "ToPort" : 22
